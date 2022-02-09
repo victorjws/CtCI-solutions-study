@@ -55,8 +55,11 @@ class TreeNode2:
         # same
         self.data = d
         self.size = 1
-        self.left: "TreeNode" = None
-        self.right: "TreeNode" = None
+        self.left: "TreeNode2" = None
+        self.right: "TreeNode2" = None
+
+    def __repr__(self):
+        return f"Node({self.data})"
 
     def get_ith_node(self, i: int) -> "TreeNode2":
         left_size = 0 if self.left is None else self.left.size
@@ -72,17 +75,17 @@ class TreeNode2:
         # same
         if d <= self.data:
             if self.left is None:
-                self.left = TreeNode(d)
+                self.left = TreeNode2(d)
             else:
                 self.left.insert_in_order(d)
         else:
             if self.right is None:
-                self.right = TreeNode(d)
+                self.right = TreeNode2(d)
             else:
                 self.right.insert_in_order(d)
         self.size += 1
 
-    def find(self, d: int) -> "TreeNode":
+    def find(self, d: int) -> "TreeNode2":
         # same
         if d == self.data:
             return self
@@ -96,21 +99,48 @@ class TreeNode2:
 class Tree:
     root: TreeNode2 = None
 
+    def __repr__(self, node=None, level=0):
+        if node is None and level == 0:
+            node = self.root
+        ret = "  " * level + repr(node) + "\n"
+        if node is not None or level == 0:
+            ret += self.__repr__(node.left, level + 1)
+            ret += self.__repr__(node.right, level + 1)
+        return ret
+
     def size(self) -> int:
         return 0 if self.root is None else self.root.size
 
-    def get_random_node(self):
+    def get_random_node(self) -> TreeNode2 | None:
         if self.root is None:
             return None
 
         i = random.randint(0, self.size())
         return self.root.get_ith_node(i)
 
-    def insert_in_order(self, value: int):
+    def insert_in_order(self, value: int) -> None:
         if self.root is None:
-            self.root = TreeNode(value)
+            self.root = TreeNode2(value)
         else:
             self.root.insert_in_order(value)
+
+
+tree = Tree()
+tree.insert_in_order(7)
+tree.insert_in_order(5)
+tree.insert_in_order(15)
+tree.insert_in_order(3)
+tree.insert_in_order(7)
+tree.insert_in_order(12)
+tree.insert_in_order(12)
+tree.insert_in_order(17)
+tree.insert_in_order(2)
+tree.insert_in_order(4)
+tree.insert_in_order(6)
+tree.insert_in_order(8)
+tree.insert_in_order(1)
+tree.insert_in_order(9)
+print(tree.get_random_node())
 
 
 # My Solution.
