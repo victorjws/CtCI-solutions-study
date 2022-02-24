@@ -1,0 +1,24 @@
+Solution.
+The probability of winning Game 1 is p, by definition.
+Probability of winning Game 2:
+  A = P(making 1 and 2, and missing 3)
+    + P(making 1 and 3, and missing 2)
+    + P(missing 1, and making 2 and 3)
+    = p * p * (1 - p) + p * (1 - p) * p + (1 - p) * p * p
+    = 3(1 - p)p²
+  B = P(making 1, 2 and 3) = p³
+  A + B = p³ + 3(1 - p)p² = 3p² - 2p³
+Which game should you play?
+  Game 1 if P(Game 1) > P(Game 2):
+    p > 3p² - 2p³
+    1 > 3p - 2p²
+    2p² - 3p + 1 > 0
+    (2p - 1)(p - 1) > 0
+    Both terms must be positive or negative. But we know p < 1, so p - 1 < 0.
+    This means both terms must be negative.
+    2p - 1 < 0
+    2p < 1
+    p < .5
+So, we should play Game 1 if 0 < p < .5 and Game 2 if .5 < p < 1.
+If p = 0 or 0.5 or 1, then P(Game 1) = P(Game 2). so it doesn't matter which
+game we play.

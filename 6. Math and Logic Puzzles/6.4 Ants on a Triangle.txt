@@ -1,0 +1,24 @@
+Solution.
+The ants will collide if any of them are moving towards each other.
+So, the only way that they won't collide is if they are all moving in the same
+direction (clockwise or counterclockwise).
+We can compute this probability and work backwards from there.
+
+Since each ant can move in two directions, and there are three ants,
+the probability is:
+    P(clockwise)= (1/2)³
+    P(counter clockwise)= (1/2)³
+    P(same direction)= (1/2)³ + (1/2)³ = 1/4
+
+The probability of collision is therefore the probability of the ants not
+moving in the same direction:
+    P(collision) = 1 - P(same direction) = 1 - 1/4 = 3/4
+
+To generalize this to an n-vertex polygon:
+there are still only two ways in which the ants can move to avoid a collision,
+but there are 2ⁿ ways they can move in total.
+Therefore, in general, probability of collision is:
+    P(clockwise) = (1/2)ⁿ
+    P(counter) = (1/2)ⁿ
+    P(same direction) = 2(1/2)ⁿ = (1/2)ⁿ⁻¹
+    P(collision) = 1 - P(same direction) = 1 - (1/2)ⁿ⁻¹
